@@ -4,7 +4,6 @@ namespace Comur\ImageBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-
 use Comur\ImageBundle\DependencyInjection\Compiler\FormPass;
 
 class ComurImageBundle extends Bundle
@@ -12,9 +11,10 @@ class ComurImageBundle extends Bundle
     /**
      * {@inheritdoc}
      */
-    public function build(ContainerBuilder $container)
+    public function build(ContainerBuilder $container): void
     {
         parent::build($container);
+
         $container->addCompilerPass(new FormPass());
     }
 }

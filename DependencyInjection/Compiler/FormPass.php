@@ -24,15 +24,15 @@ class FormPass implements CompilerPassInterface
     /**
      * {@inheritdoc}
      */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         $template = "@ComurImage/Form/fields.html.twig";
         $resources = $container->getParameter('twig.form.resources');
         // Ensure it wasn't already added via config
-        if (!in_array($template, $resources)) {
+        if (! in_array($template, $resources, true)) {
             // If fields.html.twig is found, insert ComurImageBundle right after
             // Else insert ComurImageBundle in first position
-            if (false !== ($key = array_search('fields.html.twig', $resources))) {
+            if (false !== ($key = array_search('fields.html.twig', $resources, true))) {
                 array_splice($resources, ++$key, 0, $template);
             } else {
                 array_unshift($resources, $template);
@@ -43,10 +43,10 @@ class FormPass implements CompilerPassInterface
 
         $template = "@ComurImage/Form/croppable_image_modal.html.twig";
         // Ensure it wasn't already added via config
-        if (!in_array($template, $resources)) {
+        if (! in_array($template, $resources, true)) {
             // If form_div_layout.html.twig is found, insert ComurImageBundle right after
             // Else insert ComurImageBundle in first position
-            if (false !== ($key = array_search('form_div_layout.html.twig', $resources))) {
+            if (false !== ($key = array_search('form_div_layout.html.twig', $resources, true))) {
                 array_splice($resources, ++$key, 0, $template);
             } else {
                 array_unshift($resources, $template);
@@ -54,6 +54,5 @@ class FormPass implements CompilerPassInterface
 
             $container->setParameter('twig.form.resources', $resources);
         }
-        // var_dump($resources);exit;
     }
 }

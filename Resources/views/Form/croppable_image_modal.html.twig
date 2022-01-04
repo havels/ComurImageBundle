@@ -1,15 +1,6 @@
 {% trans_default_domain comur_translation_domain %}
-{# trans_default_domain 'ComurImageBundle' #}
 
 {{ render(controller('Comur\\ImageBundle\\Controller\\UploadController::getTranslationCatalogue')) }}
-
-{#<script>#}
-{#    const comurImageTranslations = {{ {#}
-{#        'Please select or upload an image': 'Please select or upload an image'|trans,#}
-{#        'File is too big': 'File is too big'|trans,#}
-{#        'Filetype not allowed': 'Filetype not allowed'|trans#}
-{#    }|json_encode|raw }};#}
-{#</script>#}
 
 {% set bv = bootstrap_version is defined ? bootstrap_version : (include_bootstrap is not defined or include_bootstrap ? 4 : 3) %}
 
@@ -44,7 +35,7 @@
 {% block comur_image_stylesheets %}
 <link rel="stylesheet" href="{{ asset('bundles/comurimage/vendor/Jcrop/css/jquery.Jcrop.min.css') }}" type="text/css" />
 {% if include_bootstrap is not defined or include_bootstrap %}
-    <!-- The bootstrap stylesheet, can be omitted if already inclided -->
+    <!-- The bootstrap stylesheet, can be omitted if already included -->
     <link rel="stylesheet" href="{{ asset('bundles/comurimage/vendor/bootstrap/dist/css/bootstrap.min.css') }}" type="text/css" />
 {% endif %}
 <link rel="stylesheet" href="{{ asset('bundles/comurimage/css/comur.image_bundle.css') }}" type="text/css" />
@@ -120,10 +111,6 @@
                         <i class="fa fa-cut"></i>&nbsp;
                         {% trans %}Crop & Use !{% endtrans %}
                     </span>
-{#                    <span class="btn btn-danger hidden" id="image_crop_cancel">#}
-{#                        <i class="fa fa-ban"></i>&nbsp;#}
-{#                        {% trans %}Cancel{% endtrans %}#}
-{#                    </span>#}
                 </div>
             </div>
         </div>

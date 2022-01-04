@@ -1,8 +1,7 @@
 {% block comur_image_widget %}
     {% trans_default_domain comur_translation_domain %}
-    {# trans_default_domain 'ComurImageBundle' #}
+
     {% apply spaceless %}
-        {# block('form_widget_simple') #}
         {{ form_widget(form[name])}}
         {% if options.uploadConfig.saveOriginal %}
             {{ form_widget(form[options.uploadConfig.saveOriginal])}}
@@ -21,18 +20,17 @@
             <div id="image_preview_image_{{form[name].vars.id}}">
                 {% if not options.fieldImage %}
                     {% if form[name].vars.value %}
-                        <img title="{{ options.cropConfig.minWidth }} x {{ options.cropConfig.minHeight}}" src="/{{ options.uploadConfig.webDir ~ '/' ~ form[name].vars.value }}?{{ 'now'  | date('U') }}" id="{{ form[name].vars.id }}_preview" style="{{ options.uploadConfig.saveOriginal ? 'cursor:hand; cursor: pointer' : ''}}"/>
+                        <img title="{{ options.cropConfig.minWidth }} x {{ options.cropConfig.minHeight}}" src="/{{ options.uploadConfig.webDir ~ '/' ~ form[name].vars.value }}?{{ 'now'  | date('U') }}" id="{{ form[name].vars.id }}_preview" style="{{ options.uploadConfig.saveOriginal ? 'cursor:hand; cursor: pointer' : ''}}" alt=""/>
                     {% else %}
-                        <img title="{{ options.cropConfig.minWidth }} x {{ options.cropConfig.minHeight}}" data-src="holder.js/{{ options.cropConfig.minWidth }}x{{ options.cropConfig.minHeight}}" id="{{ form[name].vars.id }}_preview"/>
+                        <img title="{{ options.cropConfig.minWidth }} x {{ options.cropConfig.minHeight}}" data-src="holder.js/{{ options.cropConfig.minWidth }}x{{ options.cropConfig.minHeight}}" id="{{ form[name].vars.id }}_preview" alt=""/>
                     {% endif %}
                 {% else %}
                     {% if form[name].vars.value %}
-                        <img title="{{ options.cropConfig.minWidth }} x {{ options.cropConfig.minHeight}}" src="/{{ (options.uploadConfig.webDir ~ '/' ~ form[name].vars.value)|thumb(options.fieldImage.maxWidth, options.fieldImage.maxHeight) }}?{{ 'now'  | date('U') }}" id="{{ form[name].vars.id }}_preview" style="{{ options.uploadConfig.saveOriginal ? 'cursor:hand; cursor: pointer' : ''}}"/>
+                        <img title="{{ options.cropConfig.minWidth }} x {{ options.cropConfig.minHeight}}" src="/{{ (options.uploadConfig.webDir ~ '/' ~ form[name].vars.value)|thumb(options.fieldImage.maxWidth, options.fieldImage.maxHeight) }}?{{ 'now'  | date('U') }}" id="{{ form[name].vars.id }}_preview" style="{{ options.uploadConfig.saveOriginal ? 'cursor:hand; cursor: pointer' : ''}}" alt=""/>
                     {% else %}
-                        <img title="{{ options.cropConfig.minWidth }} x {{ options.cropConfig.minHeight}}" data-src="holder.js/{{ options.fieldImage.maxWidth }}x{{ options.fieldImage.maxHeight}}" id="{{ form[name].vars.id }}_preview"/>
+                        <img title="{{ options.cropConfig.minWidth }} x {{ options.cropConfig.minHeight}}" data-src="holder.js/{{ options.fieldImage.maxWidth }}x{{ options.fieldImage.maxHeight}}" id="{{ form[name].vars.id }}_preview" alt=""/>
                     {% endif %}
                 {% endif %}
-
             </div>
         </div>
     {% endapply %}
@@ -43,7 +41,6 @@
             {% if options.uploadConfig.saveOriginal %}
                 if($('#{{ form[options.uploadConfig.saveOriginal].vars.id }}').val()){
                     $('#{{ form[name].vars.id }}_preview').click(function(e){
-                        // console.log(e.target);
                         if($( e.target ).is( "img" )){
                             $('<div class="modal hide fade"><img src="/{{options.uploadConfig.webDir}}/{{ form[options.uploadConfig.saveOriginal].vars.value }}"/></div>').modal();
                             return false;
@@ -57,7 +54,6 @@
                     options['originalImageFieldId'] = '{{ form[options.uploadConfig.saveOriginal].vars.id }}';
                 {% endif %}
                 initializeImageManager('{{ form[name].vars.id }}', options);
-                // console.log('{{form[name].vars.id}} onclick');
                 $('#image_upload_modal').modal({
                   backdrop: 'static',
                   keyboard: false
@@ -78,7 +74,6 @@
 
 {% block comur_gallery_widget %}
     {% trans_default_domain comur_translation_domain %}
-    {# trans_default_domain 'ComurImageBundle' #}
 
     {% apply spaceless %}
         {{- form_errors(form) -}}
@@ -94,7 +89,7 @@
                         <span class="gallery-image-helper"></span>
                         {{ form_widget(image) }}
                         <span class="remove-image"><i class="fa fa-times" data-delete="image"></i></span>
-                        <img src="/{{ (options.uploadConfig.webDir ~ '/' ~ image.vars.value)|thumb(options.galleryThumbSize, options.galleryThumbSize) }}?{{ 'now'  | date('U') }}"/>
+                        <img src="/{{ (options.uploadConfig.webDir ~ '/' ~ image.vars.value)|thumb(options.galleryThumbSize, options.galleryThumbSize) }}?{{ 'now'  | date('U') }}" alt=""/>
                     </div>
                 {% endfor %}
             </div>

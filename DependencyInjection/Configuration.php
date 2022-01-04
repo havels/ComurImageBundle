@@ -15,12 +15,10 @@ class Configuration implements ConfigurationInterface
     /**
      * {@inheritDoc}
      */
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('comur_image');
-        $rootNode = method_exists($treeBuilder, "getRootNode")
-            ? $treeBuilder->getRootNode()
-            : $treeBuilder->root('comur_image'); // BC layer for symfony/config 4.2 and older
+        $rootNode = $treeBuilder->getRootNode();
 
         $rootNode
             ->children()

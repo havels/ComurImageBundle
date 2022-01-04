@@ -1,11 +1,11 @@
 comur_api_upload:
-    path: /upload #/{paramName}/{uploadUrl}/{webDir}/{minWidth}/{minHeight}
+    path: /upload
     defaults: {_controller: \Comur\ImageBundle\Controller\UploadController::uploadImageAction }
     options:
         expose: true
 
 comur_api_crop:
-    path: /crop #/{uploadUrl}/{webDir}/{imageName}/{x}/{y}/{w}/{h}/{tarW}/{tarH}
+    path: /crop
     defaults: {_controller: \Comur\ImageBundle\Controller\UploadController::cropImageAction }
     options:
         expose: true

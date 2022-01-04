@@ -292,7 +292,7 @@ class UploadHandler
 
     protected function get_file_object($file_name) {
         if ($this->is_valid_file_object($file_name)) {
-            $file = new stdClass();
+            $file = new \stdClass();
             $file->name = $file_name;
             $file->size = $this->get_file_size(
                 $this->get_upload_path($file_name)
@@ -948,7 +948,7 @@ class UploadHandler
                         return $dimensions;
                     }
                     return false;
-                } catch (Exception $e) {
+                } catch (\Exception $e) {
                     error_log($e->getMessage());
                 }
             }
@@ -1017,7 +1017,7 @@ class UploadHandler
         }
         if (count($failed_versions)) {
             $file->error = $this->get_error_message('image_resize')
-                    .' ('.implode($failed_versions,', ').')';
+                    .' ('.implode(', ', $failed_versions).')';
         }
         // Free memory:
         $this->destroy_image_object($file_path);
