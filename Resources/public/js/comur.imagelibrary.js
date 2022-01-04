@@ -26,7 +26,12 @@ function initializeImageManager(id, options, cb){
             url: Routing.generate(options.uploadConfig.libraryRoute),
             data: {dir: options.uploadConfig.libraryDir},
             success: function(responseData){
-                var response = $.parseJSON(responseData);
+                var response;
+                if (typeof responseData !== 'object') {
+                    response = $.parseJSON(responseData);
+                } else {
+                    response = responseData;
+                }
                 var files = response.files;
                 for (var i = files.length - 1; i >= 0; i--) {
                     var now = new Date().getTime();
@@ -194,7 +199,12 @@ function cropImage(id, options){
             'h': c.h
         },
         success: function(responseData){
-            var data = $.parseJSON(responseData);
+            var data;
+            if (typeof responseData !== 'object') {
+                data = $.parseJSON(responseData);
+            } else {
+                data = responseData;
+            }
             var filename = data.filename;
             var previewSrc = data.previewSrc;
 
